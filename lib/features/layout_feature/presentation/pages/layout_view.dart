@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/features/browse_feature/presentation/pages/search_view.dart';
-import 'package:movies_app/features/home_freature/presentation/pages/main.dart';
 import 'package:movies_app/features/home_freature/presentation/widgets/main_movie.dart';
 import 'package:movies_app/features/search_feature/presentation/pages/search_view.dart';
 

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/config/constants.dart';
 import 'package:movies_app/config/themes.dart';
 import 'package:movies_app/features/home_freature/data/home_api_service.dart';
-import 'package:movies_app/features/home_freature/data/models/popular_movies_model.dart';
 
 class MainMovie extends StatelessWidget {
   const MainMovie({super.key});
@@ -27,21 +26,34 @@ class MainMovie extends StatelessWidget {
                 FutureBuilder(
                   future: PopularMovieApi.fetchPopularMovie(),
                   builder: (context, snapshot) {
-                    if(snapshot.hasError){
-                      return Center(child: Text("Error"),);
+                    if (snapshot.hasError) {
+                      return const Center(
+                        child: Text("Error"),
+                      );
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
                     return Image.network(
-                        "${Constants.imageBaseUrl}${snapshot.data?[index].backdropPath}");
+                        "${Constants.imageBaseUrl}${snapshot.data?[index].backdropPath}",
+                    fit: BoxFit.cover,);
                   },
                 ),
                 Positioned(
-                    top: 100,
+                    top: 170,
                     left: 20,
                     child: FutureBuilder(
                       future: PopularMovieApi.fetchPopularMovie(),
                       builder: (context, snapshot) {
-                        return Image.network(
-                            "${Constants.imageBaseUrl}${snapshot.data?[index].backdropPath}");
+                        return SizedBox(
+                          width: 100,
+                          child: Image.network(
+                            "${Constants.imageBaseUrl}${snapshot.data?[index].posterPath}",
+                            fit: BoxFit.cover,
+                          ),
+                        );
                       },
                     )
 
